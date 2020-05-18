@@ -8,6 +8,7 @@ def run_linear_regession_pipeline():
     r.preprocess()
     r.train(r.data, training_labels)
     r.score(r.data, training_labels)
+    r.save_model("linear_regression_model.pkl")
 
 if __name__ == '__main__':
     run_linear_regession_pipeline()
