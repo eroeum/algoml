@@ -1,6 +1,6 @@
 from .. import backend as A
-from .combined_attributes_adder import CombindedAttributesAdder
-from .data_frame_selector import DataFrameSelector
+# from .combined_attributes_adder import CombindedAttributesAdder
+# from .data_frame_selector import DataFrameSelector
 
 import numpy as np
 import os
@@ -49,14 +49,14 @@ class LinearRegressionPipeline(A.Pipeline):
         cat_attribs = ["ocean_proximity"]
 
         num_pipeline = Pipeline([
-            ('selector', DataFrameSelector(num_attribs)),
+            ('selector', A.DataFrameSelector(num_attribs)),
             ('imputer', SimpleImputer(strategy="median")),
-            ('attribs_adder', CombindedAttributesAdder()),
+            ('attribs_adder', A.CombindedAttributesAdder()),
             ('std_scaler', StandardScaler()),
         ])
 
         cat_pipeline = Pipeline([
-            ('selector', DataFrameSelector(cat_attribs)),
+            ('selector', A.DataFrameSelector(cat_attribs)),
             ('cat_encoder', OneHotEncoder()),
         ])
 
