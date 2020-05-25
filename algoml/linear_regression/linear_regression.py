@@ -1,6 +1,4 @@
 from .. import backend as A
-# from .combined_attributes_adder import CombindedAttributesAdder
-# from .data_frame_selector import DataFrameSelector
 
 from joblib import dump, load
 import numpy as np
