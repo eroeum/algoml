@@ -1,4 +1,12 @@
+from algoml.binary_classification.binary_classification import BinaryClassificationPipeline
 from algoml.linear_regression.linear_regression import LinearRegressionPipeline
+
+def run_binary_classification_pipeline():
+    c = BinaryClassificationPipeline()
+    data, target = c.load_data()
+    x_train, x_test, y_train, y_test = c.split_data()
+    c.train(x_train, y_train)
+    print(c.cm_score(x_train, y_train))
 
 def run_linear_regession_pipeline():
     r = LinearRegressionPipeline()
@@ -11,4 +19,4 @@ def run_linear_regession_pipeline():
     r.save_model("linear_regression_model.pkl")
 
 if __name__ == '__main__':
-    run_linear_regession_pipeline()
+    run_classification_pipeline()
