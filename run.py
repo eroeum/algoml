@@ -1,5 +1,6 @@
 from algoml.binary_classification.binary_classification import BinaryClassificationPipeline
 from algoml.linear_regression.linear_regression import LinearRegressionPipeline
+from algoml.multiclass_classification.multiclass_classification import MulticlassClassificationPipeline
 
 def run_binary_classification_pipeline():
     c = BinaryClassificationPipeline()
@@ -19,5 +20,14 @@ def run_linear_regession_pipeline():
     r.score(r.data, training_labels)
     r.save_model("linear_regression_model.pkl")
 
+def run_multiclass_classification_pipeline():
+    c = MulticlassClassificationPipeline()
+    data, target = c.load_data()
+    x_train, x_test, y_train, y_test = c.split_data()
+    c.train(x_train, y_train)
+    print(c.cv_score(x_train, y_train))
+    c.save_model("multiclass_classification_model.pkl")
+
+
 if __name__ == '__main__':
-    run_binary_classification_pipeline()
+    run_multiclass_classification_pipeline()
