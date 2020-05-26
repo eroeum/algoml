@@ -7,6 +7,7 @@ def run_binary_classification_pipeline():
     x_train, x_test, y_train, y_test = c.split_data()
     c.train(x_train, y_train)
     print(c.cm_score(x_train, y_train))
+    c.save_model("binary_classification_model.pkl")
 
 def run_linear_regession_pipeline():
     r = LinearRegressionPipeline()
@@ -19,4 +20,4 @@ def run_linear_regession_pipeline():
     r.save_model("linear_regression_model.pkl")
 
 if __name__ == '__main__':
-    run_classification_pipeline()
+    run_binary_classification_pipeline()
