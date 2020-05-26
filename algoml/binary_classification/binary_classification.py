@@ -1,6 +1,5 @@
 from .. import backend as A
 
-from joblib import dump, load
 import numpy as np
 
 from sklearn.datasets import fetch_openml
@@ -35,12 +34,6 @@ class BinaryClassificationPipeline(A.Pipeline):
         self.data = data
         self.target = (target == '5')
         return self.data, self.target
-
-    def load_model(self, name):
-        self,model = load(name)
-
-    def save_model(self, name):
-        dump(self.model, name)
 
     def split_data(self):
         x_train, x_test = self.data[:60000], self.data[60000:]

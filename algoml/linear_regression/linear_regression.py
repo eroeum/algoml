@@ -1,6 +1,5 @@
 from .. import backend as A
 
-from joblib import dump, load
 import numpy as np
 import os
 import pandas as pd
@@ -42,9 +41,6 @@ class LinearRegressionPipeline(A.Pipeline):
         path = self.housing_path
         name = 'housing.csv'
         return super().load_data(path, name)
-
-    def load_model(self, name):
-        self,model = load(name)
 
     def preprocess(self):
         num_attribs = list(self.data.drop("ocean_proximity", axis=1))
@@ -89,9 +85,6 @@ class LinearRegressionPipeline(A.Pipeline):
 
     def train(self, training_data, training_labels):
         self.model.fit(training_data, training_labels)
-
-    def save_model(self, name):
-        dump(self.model, name)
 
     def score(self, estimators, labels):
         lin_scores = cross_val_score(self.model, estimators, labels,
