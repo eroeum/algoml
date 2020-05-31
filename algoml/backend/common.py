@@ -5,10 +5,19 @@ import pandas as pd
 import tarfile
 
 from six.moves import urllib
+from sklearn.datasets import fetch_openml
 
 def csv_to_pandas(path, name):
     csv_path = os.path.join(path, name)
     return pd.read_csv(csv_path)
+
+def fetch_open_ml_data(id, path, name):
+    if not os.path.isdir(path):
+        os.makedirs(path)
+    csv_path = os.path.join(path, name)
+    df = fetch_openml(id, as_frame=True)
+    df['frame'].to_csv(csv_path, index=False, encoding='utf-8')
+    return df
 
 def fetch_tgz_data(url, path, tgz_name):
     if not os.path.isdir(path):
