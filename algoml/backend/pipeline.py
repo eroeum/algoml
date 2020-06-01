@@ -1,61 +1,77 @@
-from .common import csv_to_pandas
-from .common import fetch_tgz_data
-from .common import split_train_test
+import abc
 
-from joblib import dump, load
+class Pipeline(metaclass=abc.ABCMeta):
 
-class Pipeline():
-    def __init__(self):
-        self.model = None
-        self._full_data = None
-        self.data = {
-            'training' : {'x': None, 'y': None},
-            'testing'  : {'x': None, 'y': None}
-        }
+    @classmethod
+    def __subclasshook__(cls, subclass):
+        return(hasattr(subclass, '__init__') and
+               callable(subclass.__init__) and
+               hasattr(subclass, 'fetch_data') and
+               callable(subclass.fetch_data) and
+               hasattr(subclass, 'ingest_data') and
+               callable(subclass.ingest_data) and
+               hasattr(subclass, 'split_data') and
+               callable(subclass.split_data) and
+               hasattr(subclass, 'preprocess') and
+               callable(subclass.preprocess) and
+               hasattr(subclass, 'train') and
+               callable(subclass.train) and
+               hasattr(subclass, 'evaluate') and
+               callable(subclass.evaluate) and
+               hasattr(subclass, 'run') and
+               callable(subclass.run) and
+               hasattr(subclass, 'save_model') and
+               callable(subclass.save_model) and
+               hasattr(subclass, 'load_model') and
+               callable(subclass.load_model) or
+               NotImplemented)
 
-    def fetch_data(self, url, path, name):
-        """ Fetch data locally
-        @param url URL or location for data
-        @param path Path to save data to
-        @param name Name of resulting data
-        """
-        return fetch_tgz_data(url, path, name)
+    @abc.abstractmethod
+    def __init__(self) -> 'Model':
+        """Initialize data values and model type"""
+        raise NotImplementedError
 
-    def ingest_data(self, path, name):
-        """ Ingest data into memory """
-        self._full_data = csv_to_pandas(path, name)
-        return self._full_data
+    @abc.abstractmethod
+    def fetch_data(self, url, path, name) -> 'data/location':
+        """Fetches data to local disk space"""
+        raise NotImplementedError
 
-    def split_data(self, test_ratio):
-        """ Split data into training and testing set """
-        self.data_training, self.data_testing = split_train_test(self.data, test_ratio)
-        return self.data_training, self.data_testing
+    @abc.abstractmethod
+    def ingest_data(self, path, name) -> 'Full data set':
+        """Load data into local memory"""
+        raise NotImplementedError
 
-    def preprocess(self):
-        """ Preprocess Data """
-        self.data = self.data
-        return self.data
+    @abc.abstractmethod
+    def split_data(self, test_ratio) -> ('x_train', 'y_train', 'x_test', 'y_test'):
+        """Split data into training and testing sets"""
+        raise NotImplementedError
 
-    def train(self):
-        """ Train model on training data """
-        if not self.model:
-            return None
-        else:
-            x = self.data['training']['x']
-            y = self.data['training']['y']
-            return self.model.fit(x, y)
+    @abc.abstractmethod
+    def preprocess(self) -> 'Transformed data':
+        """Preprocess data for training and inference"""
+        raise NotImplementedError
 
-    def evaluate(self):
-        """ Evaluate model on data """
-        return 0
+    @abc.abstractmethod
+    def train(self) -> None:
+        """Train model on training data"""
+        raise NotImplementedError
 
-    def run(self):
-        return
+    @abc.abstractmethod
+    def evaluate(self) -> ('scores'):
+        """Evaluate model"""
+        raise NotImplementedError
 
-    def save_model(self, name):
-        """ Save model into .pkl format """
-        dump(self.model, name)
+    @abc.abstractmethod
+    def run(self) -> None:
+        """Run pipeline"""
+        raise NotImplementedError
 
-    def load_model(self, name):
-        """ Load .pkl model """
-        self.model = load(name)
+    @abc.abstractmethod
+    def save_model(self, name) -> None:
+        """Save model for future use"""
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def load_model(self, name) -> None:
+        """Load model that has been saved"""
+        raise NotImplementedError

@@ -1,6 +1,7 @@
 from .. import backend as A
 
 import copy
+from joblib import dump, load
 import numpy as np
 import os
 
@@ -11,7 +12,11 @@ from sklearn.model_selection import cross_val_predict, cross_val_score
 
 class MulticlassClassificationPipeline(A.Pipeline):
     def __init__(self):
-        super().__init__()
+        self._full_data = None
+        self.data = {
+            'training' : {'x': None, 'y': None},
+            'testing'  : {'x': None, 'y': None}
+        }
         self.model = SGDClassifier(random_state=42)
 
         self.id = 'mnist_784'
@@ -81,3 +86,9 @@ class MulticlassClassificationPipeline(A.Pipeline):
         self.evaluate(verbose, type='cross-validation')
         if save_model:
             self.save_model("binary_classification_model.pkl")
+
+    def save_model(self, name):
+        dump(self.model, name)
+
+    def load_model(self, name):
+        self.model = load(name)

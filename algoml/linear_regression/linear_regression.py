@@ -1,5 +1,6 @@
 from .. import backend as A
 
+from joblib import dump, load
 import numpy as np
 import os
 import pandas as pd
@@ -13,7 +14,11 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 class LinearRegressionPipeline(A.Pipeline):
     def __init__(self):
-        super().__init__()
+        self._full_data = None
+        self.data = {
+            'training' : {'x': None, 'y': None},
+            'testing'  : {'x': None, 'y': None}
+        }
         self.model = LinearRegression()
         self.imputer = SimpleImputer(strategy="median")
 
@@ -30,14 +35,14 @@ class LinearRegressionPipeline(A.Pipeline):
             path = self.housing_path
         if name is None:
             name = self.name_tgz
-        return super().fetch_data(url, path, name)
+        return A.fetch_tgz_data(url, path, name)
 
     def ingest_data(self, path=None, name=None):
         if path is None:
             path = self.housing_path
         if name is None:
             name = self.name_csv
-        self._full_data = super().ingest_data(path, name)
+        self._full_data = A.csv_to_pandas(path, name)
         return self._full_data
 
     def split_data(self, test_ratio=0.8):
@@ -108,6 +113,12 @@ class LinearRegressionPipeline(A.Pipeline):
         self.evaluate(verbose)
         if save_model:
             self.save_model("linear_regression_model.pkl")
+
+    def save_model(self, name):
+        dump(self.model, name)
+
+    def load_model(self, name):
+        self.model = load(name)
 
     def display_score(self, scores):
         print("Scores:", scores)
