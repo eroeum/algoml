@@ -37,6 +37,13 @@ def fetch_tgz_data(url, path, tgz_name):
     tgz.close()
     return tgz_path
 
+def pandas_to_csv(df, path, name):
+    if not os.path.isdir(path):
+        os.makedirs(path)
+    csv_path = os.path.join(path, name)
+    df.to_csv(csv_path, index=False, encoding='utf-8')
+    return df
+
 def split_train_test(data, test_ratio=0.2, hash=hashlib.md5):
     def test_set_check(identifier, test_ratio, hash):
         return hash(np.int64(identifier)).digest()[-1] <= 256 * test_ratio
