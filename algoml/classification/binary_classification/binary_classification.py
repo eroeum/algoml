@@ -34,7 +34,7 @@ class BinaryClassificationPipeline(A.Pipeline):
         return df
 
     def ingest_data(self):
-        self._full_data =fetch_openml(self.id)
+        self._full_data = fetch_openml(self.id)
         return self._full_data
 
     def split_data(self, test_ratio=60000/70000):

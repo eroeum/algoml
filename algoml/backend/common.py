@@ -19,6 +19,14 @@ def fetch_open_ml_data(id, path, name):
     df['frame'].to_csv(csv_path, index=False, encoding='utf-8')
     return df
 
+def fetch_pandas_dataset(bunch_func, path, name):
+    if not os.path.isdir(path):
+        os.makedirs(path)
+    csv_path = os.path.join(path, name)
+    df = bunch_func()
+    df['frame'].to_csv(csv_path, index=False, encoding='utf-8')
+    return df
+
 def fetch_tgz_data(url, path, tgz_name):
     if not os.path.isdir(path):
         os.makedirs(path)
