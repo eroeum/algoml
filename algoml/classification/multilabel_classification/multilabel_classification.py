@@ -1,4 +1,4 @@
-from .. import backend as A
+from ... import backend as A
 
 import copy
 from joblib import dump, load

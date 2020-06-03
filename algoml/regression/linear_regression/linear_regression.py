@@ -1,4 +1,4 @@
-from .. import backend as A
+from ... import backend as A
 
 from joblib import dump, load
 import numpy as np

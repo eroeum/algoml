@@ -1,4 +1,4 @@
-from .. import backend as A
+from ... import backend as A
 
 import copy
 from joblib import dump, load
@@ -10,7 +10,7 @@ from sklearn.linear_model import SGDClassifier
 from sklearn.metrics import confusion_matrix, f1_score, precision_score, recall_score
 from sklearn.model_selection import cross_val_predict, cross_val_score
 
-class MulticlassClassificationPipeline(A.Pipeline):
+class BinaryClassificationPipeline(A.Pipeline):
     def __init__(self):
         self._full_data = None
         self.data = {
@@ -47,9 +47,9 @@ class MulticlassClassificationPipeline(A.Pipeline):
         x_train, y_train = x_train[shuffled_index], y_train[shuffled_index]
 
         self.data['training']['x'] = x_train
-        self.data['training']['y'] = y_train
+        self.data['training']['y'] = (y_train == '5')
         self.data['testing']['x'] = x_test
-        self.data['testing']['y'] = y_test
+        self.data['testing']['y'] = (y_test == '5')
 
         return x_train, y_train, x_test, y_test
 
@@ -83,7 +83,7 @@ class MulticlassClassificationPipeline(A.Pipeline):
         self.split_data()
         self.preprocess()
         self.train()
-        self.evaluate(verbose, type='cross-validation')
+        self.evaluate(verbose)
         if save_model:
             self.save_model("binary_classification_model.pkl")
 

@@ -1,0 +1,3 @@
+from .binary_classification.binary_classification import BinaryClassificationPipeline
+from .multiclass_classification.multiclass_classification import MulticlassClassificationPipeline
+from .multilabel_classification.multilabel_classification import MultilabelClassificationPipeline

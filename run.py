@@ -1,7 +1,7 @@
-from algoml.binary_classification.binary_classification import BinaryClassificationPipeline
-from algoml.linear_regression.linear_regression import LinearRegressionPipeline
-from algoml.multiclass_classification.multiclass_classification import MulticlassClassificationPipeline
-from algoml.multilabel_classification.multilabel_classification import MultilabelClassificationPipeline
+from algoml.classification import BinaryClassificationPipeline
+from algoml.classification import MulticlassClassificationPipeline
+from algoml.classification import MultilabelClassificationPipeline
+from algoml.regression import LinearRegressionPipeline
 
 def run_linear_regession_pipeline():
     r = LinearRegressionPipeline()
@@ -17,7 +17,7 @@ def run_multiclass_classification_pipeline():
 
 def run_multilabel_classification_pipeline():
     c = MultilabelClassificationPipeline()
-    c.run(save_model=True)
+    c.run()
 
 if __name__ == '__main__':
-    run_multilabel_classification_pipeline()
+    run_binary_classification_pipeline()
