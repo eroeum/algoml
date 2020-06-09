@@ -23,3 +23,5 @@ An alternative to the gini impurity metric is **entropy** which measures the ave
 <img src="https://bit.ly/2YkVgcA" align="center" border="0" alt="H_i=-\sum_{k=1}^np_{i,k}log(p_{i,k})" width="182" height="50" />.
 
 When regularizing hyperparameters, the **max depth** represents the maximum tree depth that the graph can go to.  Since decision trees tend to overfit, this is usually necessary to **prune the tree**.  A model that specifies this is called a **parametric model** and one that does not is a **non-parametric model**.
+
+However, decision trees can be very **instable** in that they make decisions that usually are orthogonal to an axis.  Therefore, any rotation can cause massive changes.

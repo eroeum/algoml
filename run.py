@@ -2,6 +2,7 @@ from algoml.classification import BinaryClassificationPipeline
 from algoml.classification import MulticlassClassificationPipeline
 from algoml.classification import MultilabelClassificationPipeline
 from algoml.decision_tree import DecisionTreeClassificationPipeline
+from algoml.decision_tree import DecisionTreeRegressionPipeline
 from algoml.regression import LinearRegressionPipeline
 from algoml.regression import LogisticRegressionPipeline
 from algoml.svm import LinearSVMPipeline
@@ -37,7 +38,11 @@ def run_nonlinear_svm_pipeline():
 
 def run_decision_tree_classification_pipeline():
     d = DecisionTreeClassificationPipeline()
-    d.run(save_model=True)
+    d.run()
+
+def run_decision_tree_regression_pipeline():
+    d = DecisionTreeRegressionPipeline()
+    d.run()
 
 if __name__ == '__main__':
-    run_decision_tree_classification_pipeline()
+    run_decision_tree_regression_pipeline()

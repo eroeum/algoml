@@ -1,1 +1,2 @@
 from .decision_tree_classification.decision_tree_classification import DecisionTreeClassificationPipeline
+from .decision_tree_regression.decision_tree_regression import DecisionTreeRegressionPipeline
