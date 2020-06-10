@@ -3,6 +3,7 @@ from algoml.classification import MulticlassClassificationPipeline
 from algoml.classification import MultilabelClassificationPipeline
 from algoml.decision_tree import DecisionTreeClassificationPipeline
 from algoml.decision_tree import DecisionTreeRegressionPipeline
+from algoml.ensembles import BaggingPipeline
 from algoml.ensembles import VotingClassifierPipeline
 from algoml.regression import LinearRegressionPipeline
 from algoml.regression import LogisticRegressionPipeline
@@ -49,5 +50,9 @@ def run_voting_classifier_pipeline():
     e = VotingClassifierPipeline()
     e.run()
 
+def run_bagging_pipeline():
+    e = BaggingPipeline()
+    e.run()
+
 if __name__ == '__main__':
-    run_voting_classifier_pipeline()
+    run_bagging_pipeline()

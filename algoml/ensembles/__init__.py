@@ -1,1 +1,2 @@
+from .bagging.bagging import BaggingPipeline
 from .voting_classifier.voting_classifier import VotingClassifierPipeline
