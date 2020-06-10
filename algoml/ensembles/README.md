@@ -13,3 +13,5 @@ A **Random Forest** is another ensemble method that is typically applying the ba
 **Hypothesis boosting (Boosting)** is another ensemble method that trains predictors sequentially trying to fix its predecessors.  When doing so, changing decreasing the learning rate requires more trees, causing **shrinkage**. For example,
 - **AdaBoost**: Models try to boost the performance of instances that the predecessors seemed to underfit by tweaking the weights.  After creating the models, bagging is performed on all models except weighted based on accuracy.  The multiclass version is called **Stagewise Additive Modeling using a Multiclass Exponential Loss Function (SAMME)**.
 - **Gradient Boosting (GBRT)**:  Models try to boost the performance of instances that the predecessors seemed to underfit by tweaking the model to the residual error.  After creating the models, bagging is performed on all models except weighted based on accuracy.
+
+Another idea is **stack generalizations (stacking)**. The idea is to not make predictions trivially and create another model called a **blender or metalearner** that will predict for us.
