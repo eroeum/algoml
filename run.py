@@ -5,6 +5,7 @@ from algoml.decision_tree import DecisionTreeClassificationPipeline
 from algoml.decision_tree import DecisionTreeRegressionPipeline
 from algoml.ensembles import AdaBoostPipeline
 from algoml.ensembles import BaggingPipeline
+from algoml.ensembles import GradientBoostPipeline
 from algoml.ensembles import RandomizedForestPipeline
 from algoml.ensembles import VotingClassifierPipeline
 from algoml.regression import LinearRegressionPipeline
@@ -64,5 +65,9 @@ def run_adaboost_pipeline():
     e = AdaBoostPipeline()
     e.run()
 
+def run_gradient_boost_pipeline():
+    e = GradientBoostPipeline()
+    e.run()
+
 if __name__ == '__main__':
-    run_adaboost_pipeline()
+    run_gradient_boost_pipeline()

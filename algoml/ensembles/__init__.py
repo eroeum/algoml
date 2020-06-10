@@ -1,4 +1,5 @@
 from .adaboost.adaboost import AdaBoostPipeline
 from .bagging.bagging import BaggingPipeline
+from .gradient_boosting.gradient_boosting import GradientBoostPipeline
 from .randomized_forest.randomized_forest import RandomizedForestPipeline
 from .voting_classifier.voting_classifier import VotingClassifierPipeline

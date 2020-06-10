@@ -10,5 +10,6 @@ One type of ensembles are **voting classifiers**.  These are methods of taking l
 
 A **Random Forest** is another ensemble method that is typically applying the bagging method to decision trees.  Random forests can take it one step forward and add more randomness by apply random thresholds for decision making at each node.  A very random forest is called an **extremly randomized trees (extre-trees)** and trades more bias for lower variance.  This can aid in data exploration by viewing how many trees use a feature for impurity detection thus showing feature importance.
 
-**Hypothesis boosting (Boosting)** is another ensemble method that trains predictors sequentially trying to fix its predecessors.  For example,
+**Hypothesis boosting (Boosting)** is another ensemble method that trains predictors sequentially trying to fix its predecessors.  When doing so, changing decreasing the learning rate requires more trees, causing **shrinkage**. For example,
 - **AdaBoost**: Models try to boost the performance of instances that the predecessors seemed to underfit by tweaking the weights.  After creating the models, bagging is performed on all models except weighted based on accuracy.  The multiclass version is called **Stagewise Additive Modeling using a Multiclass Exponential Loss Function (SAMME)**.
+- **Gradient Boosting (GBRT)**:  Models try to boost the performance of instances that the predecessors seemed to underfit by tweaking the model to the residual error.  After creating the models, bagging is performed on all models except weighted based on accuracy.
