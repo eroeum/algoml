@@ -1,0 +1,1 @@
+from .voting_classifier.voting_classifier import VotingClassifierPipeline
