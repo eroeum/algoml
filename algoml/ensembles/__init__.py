@@ -1,3 +1,4 @@
+from .adaboost.adaboost import AdaBoostPipeline
 from .bagging.bagging import BaggingPipeline
 from .randomized_forest.randomized_forest import RandomizedForestPipeline
 from .voting_classifier.voting_classifier import VotingClassifierPipeline

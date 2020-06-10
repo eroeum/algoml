@@ -3,6 +3,7 @@ from algoml.classification import MulticlassClassificationPipeline
 from algoml.classification import MultilabelClassificationPipeline
 from algoml.decision_tree import DecisionTreeClassificationPipeline
 from algoml.decision_tree import DecisionTreeRegressionPipeline
+from algoml.ensembles import AdaBoostPipeline
 from algoml.ensembles import BaggingPipeline
 from algoml.ensembles import RandomizedForestPipeline
 from algoml.ensembles import VotingClassifierPipeline
@@ -59,5 +60,9 @@ def run_randomized_forest_pipeline():
     e = RandomizedForestPipeline()
     e.run()
 
+def run_adaboost_pipeline():
+    e = AdaBoostPipeline()
+    e.run()
+
 if __name__ == '__main__':
-    run_randomized_forest_pipeline()
+    run_adaboost_pipeline()
